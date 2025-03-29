@@ -1,0 +1,195 @@
+[
+  {
+    "v": 6,
+    "name": "API1",
+    "folders": [],
+    "requests": [
+      {
+        "v": "11",
+        "name": "get matches",
+        "method": "GET",
+        "endpoint": "http://localhost:8100/api/matches",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get matches by id",
+        "method": "GET",
+        "endpoint": "http://localhost:8100/api/matches/2",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "create matches",
+        "method": "POST",
+        "endpoint": "http://localhost:8100/api/matches",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "endpoint": "http://localhost:8100/api/matches/2",
+        "name": "delete matches by id",
+        "params": [],
+        "headers": [],
+        "method": "DELETE",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "endpoint": "http://localhost:8100/api/matches/2",
+        "name": "update matches by id",
+        "params": [],
+        "headers": [],
+        "method": "PUT",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "endpoint": "http://localhost:8100/api/matches/2/goals",
+        "name": "add goals",
+        "params": [],
+        "headers": [],
+        "method": "PATCH",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "endpoint": "http://localhost:8100/api/matches/2/yellowcards",
+        "name": "add yellow card",
+        "params": [],
+        "headers": [],
+        "method": "PATCH",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "endpoint": "http://localhost:8100/api/matches/2/redcards",
+        "name": "add red card",
+        "params": [],
+        "headers": [],
+        "method": "PATCH",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "endpoint": "http://localhost:8100/api/matches/2/extratime",
+        "name": "add extra time",
+        "params": [],
+        "headers": [],
+        "method": "PATCH",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {}
+      }
+    ],
+    "headers": [],
+    "auth": {
+      "authType": "none",
+      "authActive": true
+    },
+    "_ref_id": "coll_m8tq5mzi_04f7ea1d-12cf-4e83-a497-f69f179da895"
+  }
+]

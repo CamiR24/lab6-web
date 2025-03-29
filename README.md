@@ -42,5 +42,5 @@ Instalar y configurar PostgreSQL
 ### **Clonación del Repositorio**
 
 ```bash
-git clone https://github.com/TuUsuario/tu-repositorio.git
+git clone https://github.com/CamiR24/lab6-web.git
 cd tu-repositorio

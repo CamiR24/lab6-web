@@ -1,0 +1,156 @@
+# Uso de la API - Football Match API
+
+Esta es la documentación básica para interactuar con la API de gestión de partidos de fútbol.
+
+## Endpoints
+
+### 1. **GET /api/matches**
+Obtiene todos los partidos registrados en la base de datos.
+
+**Ejemplo de solicitud:**
+GET http://localhost:8080/api/matches
+
+**Respuesta:**
+```json
+[
+  {
+    "id": 1,
+    "home_team": "Team A",
+    "away_team": "Team B",
+    "date": "2025-03-28T16:00:00Z"
+  }
+]
+
+### 2. **GET /api/matches/{id}**
+Obtiene un partido específico por su ID.
+
+**Ejemplo de solicitud:**
+GET http://localhost:8080/api/matches/1
+
+**Respuesta:**
+```json
+[
+    {
+    "id": 1,
+    "home_team": "Team A",
+    "away_team": "Team B",
+    "date": "2025-03-28T16:00:00Z"
+    }
+]
+
+### 3. **POST /api/matches**
+Crea un nuevo partido. Debes proporcionar los detalles del partido, como el equipo local, el equipo visitante y la fecha del partido.
+
+**Ejemplo de solicitud:**
+POST http://localhost:8080/api/matches
+Content-Type: application/json
+
+{
+  "home_team": "Team A",
+  "away_team": "Team B",
+  "date": "2025-03-28T16:00:00Z"
+}
+
+**Respuesta:**
+```json
+[
+    {
+    "id": 1,
+    "home_team": "Team A",
+    "away_team": "Team B",
+    "date": "2025-03-28T16:00:00Z"
+    }
+]
+
+### 4. **PUT /api/matches/{id}**
+Actualiza la información de un partido existente. Debes especificar el ID del partido y proporcionar los nuevos detalles.
+
+**Ejemplo de solicitud:**
+PUT http://localhost:8080/api/matches/1
+Content-Type: application/json
+
+{
+  "home_team": "Team A",
+  "away_team": "Team C",
+  "date": "2025-03-29T18:00:00Z"
+}
+
+**Respuesta:**
+```json
+[
+    {
+    "id": 1,
+    "home_team": "Team A",
+    "away_team": "Team C",
+    "date": "2025-03-29T18:00:00Z"
+    }
+]
+
+### 5. **DELETE /api/matches/{id}**
+Elimina un partido especificado por su ID.
+
+**Ejemplo de solicitud:**
+DELETE http://localhost:8080/api/matches/1
+
+**Respuesta:**
+HTTP 204 No Content
+
+### 6. **PATCH /api/matches/{id}/goals**
+Registra un gol para un partido específico. El número de goles se puede incrementar.
+
+PATCH http://localhost:8080/api/matches/1/goals
+Content-Type: application/json
+
+{
+  "goals": 1
+}
+
+**Respuesta:**
+{
+  "message": "Gol registrado correctamente"
+}
+
+### 7. **PATCH /api/matches/{id}/yellowcards**
+Registra una tarjeta amarilla para un partido específico. El número de tarjetas amarillas se puede incrementar.
+
+PATCH http://localhost:8080/api/matches/1/yellowcards
+Content-Type: application/json
+
+{
+  "yellow_cards": 1
+}
+
+**Respuesta:**
+{
+  "message": "Tarjeta amarilla registrada correctamente"
+}
+
+### 8. **PATCH /api/matches/{id}/redcards**
+Registra una tarjeta roja para un partido específico. El número de tarjetas rojas se puede incrementar.
+
+PATCH http://localhost:8080/api/matches/1/redcards
+Content-Type: application/json
+
+{
+  "red_cards": 1
+}
+
+**Respuesta:**
+{
+  "message": "Tarjeta roja registrada correctamente"
+}
+
+### 9. **PATCH /api/matches/{id}/extratime**
+Registra si se le agregó tiempo extra a un partido específico.
+
+PATCH http://localhost:8080/api/matches/1/extratime
+Content-Type: application/json
+
+{
+  "extra_time": 1
+}
+
+**Respuesta:**
+{
+  "message": "Tiempo extra registrado correctamente"
+}
