@@ -9,8 +9,8 @@ API para gestionar partidos de fútbol, incluyendo la creación, actualización,
 - [Tecnologías](#tecnologías)
 - [Instalación](#instalación)
 - [Documentación de Swagger](#documentación-de-swagger)
-- [Clonación del Repositorio](#clonación-del-repositorio)
 - [Imágenes](#imágenes)
+- [Clonación del Repositorio](#clonación-del-repositorio)
 
 ## **Descripción**
 
@@ -31,13 +31,6 @@ Instalar Swagger para la documentación
 Instalar y configurar PostgreSQL
 - Asegúrate de tener una base de datos PostgreSQL configurada correctamente y ejecutándose. Luego, actualiza el archivo de configuración de la base de datos (database.go) con tus credenciales de conexión.
 
-
-### **Clonación del Repositorio**
-
-```bash
-git clone https://github.com/TuUsuario/tu-repositorio.git
-cd tu-repositorio
-
 ### **Imágenes**
 
 ![traer todos los partidos](pictures/todos.png)
@@ -45,3 +38,9 @@ cd tu-repositorio
 ![traer todos los partidos](pictures/crear_partido.pngd)
 ![traer partido por id](pictures/eliminar.png)
 ![traer todos los partidos](pictures/patch.png)
+
+### **Clonación del Repositorio**
+
+```bash
+git clone https://github.com/TuUsuario/tu-repositorio.git
+cd tu-repositorio
