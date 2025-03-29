@@ -11,10 +11,9 @@ import (
 
 
 func GetAllMatches(w http.ResponseWriter, r *http.Request) {
-    rows, err := database.DB.Query(
-        "SELECT id, home_team, away_team, score, date, goals, yellow_cards, red_cards, extra_time FROM matches")
+    rows, err := database.DB.Query("SELECT id, home_team, away_team, date FROM matches")
     if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
+        http.Error(w, "Error al obtener los partidos: "+err.Error(), http.StatusInternalServerError)
         return
     }
     defer rows.Close()
@@ -23,16 +22,24 @@ func GetAllMatches(w http.ResponseWriter, r *http.Request) {
 
     for rows.Next() {
         var match models.Match
-        if err := rows.Scan(&match.ID, &match.HomeTeam, &match.AwayTeam, &match.Score, &match.matchDate,
-            &match.Goals, &match.YellowCards, &match.RedCards, &match.ExtraTime); err != nil {
-            http.Error(w, err.Error(), http.StatusInternalServerError)
+        if err := rows.Scan(&match.ID, &match.HomeTeam, &match.AwayTeam, &match.MatchDate); err != nil {
+            http.Error(w, "Error al escanear los partidos: "+err.Error(), http.StatusInternalServerError)
             return
         }
         matches = append(matches, match)
     }
 
+    if len(matches) == 0 {
+        w.WriteHeader(http.StatusOK) // 200 OK
+        json.NewEncoder(w).Encode([]models.Match{})
+        return
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    
     json.NewEncoder(w).Encode(matches)
 }
+
 
 func GetMatchByID(w http.ResponseWriter, r *http.Request) {
     params := mux.Vars(r)
@@ -40,9 +47,8 @@ func GetMatchByID(w http.ResponseWriter, r *http.Request) {
 
     var match models.Match
     err := database.DB.QueryRow(
-        "SELECT id, home_team, away_team, score, date, goals, yellow_cards, red_cards, extra_time FROM matches WHERE id=$1", id).
-        Scan(&match.ID, &match.HomeTeam, &match.AwayTeam, &match.Score, &match.matchDate,
-            &match.Goals, &match.YellowCards, &match.RedCards, &match.ExtraTime)
+        "SELECT id, home_team, away_team, date FROM matches WHERE id=$1", id).
+        Scan(&match.ID, &match.HomeTeam, &match.AwayTeam, &match.MatchDate)
 
     if err != nil {
         http.Error(w, "Partido no encontrado", http.StatusNotFound)
@@ -57,9 +63,8 @@ func CreateMatch(w http.ResponseWriter, r *http.Request) {
     json.NewDecoder(r.Body).Decode(&match)
 
     _, err := database.DB.Exec(
-        "INSERT INTO matches (home_team, away_team, score, date, goals, yellow_cards, red_cards, extra_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-        match.HomeTeam, match.AwayTeam, match.Score, match.matchDate,
-        match.Goals, match.YellowCards, match.RedCards, match.ExtraTime,
+        "INSERT INTO matches (home_team, away_team, date) VALUES ($1, $2, $3)",
+        match.HomeTeam, match.AwayTeam, match.MatchDate,
     )
 
     if err != nil {
@@ -79,9 +84,8 @@ func UpdateMatch(w http.ResponseWriter, r *http.Request) {
     json.NewDecoder(r.Body).Decode(&match)
 
     _, err := database.DB.Exec(
-        "UPDATE matches SET home_team=$1, away_team=$2, score=$3, date=$4, goals=$5, yellow_cards=$6, red_cards=$7, extra_time=$8 WHERE id=$9",
-        match.HomeTeam, match.AwayTeam, match.Score, match.matchDate,
-        match.Goals, match.YellowCards, match.RedCards, match.ExtraTime, id,
+        "UPDATE matches SET home_team=$1, away_team=$2, date=$3 WHERE id=$4",
+        match.HomeTeam, match.AwayTeam, match.MatchDate, id,
     )
 
     if err != nil {
@@ -105,4 +109,88 @@ func DeleteMatch(w http.ResponseWriter, r *http.Request) {
     }
 
     w.WriteHeader(http.StatusOK)
+}
+
+func AddGoal(w http.ResponseWriter, r *http.Request) {
+    params := mux.Vars(r)
+    id, err := strconv.Atoi(params["id"])
+
+    var match models.Match
+    json.NewDecoder(r.Body).Decode(&match)
+
+    _, err = database.DB.Exec(
+        "UPDATE matches SET goals = goals + 1 WHERE id = $1",
+        id,
+    )
+
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
+
+}
+
+func AddYellowCard(w http.ResponseWriter, r *http.Request) {
+    params := mux.Vars(r)
+    id, err := strconv.Atoi(params["id"])
+
+    var match models.Match
+    json.NewDecoder(r.Body).Decode(&match)
+
+    _, err = database.DB.Exec(
+        "UPDATE matches SET yellow_cards = yellow_cards + 1 WHERE id = $1",
+        id,
+    )
+
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
+    
+}
+
+func AddRedCard(w http.ResponseWriter, r *http.Request) {
+    params := mux.Vars(r)
+    id, err := strconv.Atoi(params["id"])
+
+    var match models.Match
+    json.NewDecoder(r.Body).Decode(&match)
+
+    _, err = database.DB.Exec(
+        "UPDATE matches SET red_cards = red_cards + 1 WHERE id = $1",
+        id,
+    )
+
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
+    
+}
+
+func AddExtraTime(w http.ResponseWriter, r *http.Request) {
+    params := mux.Vars(r)
+    id, err := strconv.Atoi(params["id"])
+
+    var match models.Match
+    json.NewDecoder(r.Body).Decode(&match)
+
+    _, err = database.DB.Exec(
+        "UPDATE matches SET extra_time = TRUE WHERE id = $1",
+        id,
+    )
+
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
+    
 }
