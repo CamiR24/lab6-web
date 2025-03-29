@@ -2,7 +2,8 @@ package routes
 
 import (
     "github.com/gorilla/mux"
-    "lab6/controllers"
+    "lab6-web/controllers"
+    "github.com/swaggo/http-swagger"
 )
 
 func SetupRouter() *mux.Router {
@@ -19,6 +20,8 @@ func SetupRouter() *mux.Router {
     r.HandleFunc("/api/matches/{id}/yellowcards", controllers.AddYellowCard).Methods("PATCH")
     r.HandleFunc("/api/matches/{id}/redcards", controllers.AddRedCard).Methods("PATCH")
     r.HandleFunc("/api/matches/{id}/extratime", controllers.AddExtraTime).Methods("PATCH")
+
+    r.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
     return r
 }

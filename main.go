@@ -3,8 +3,8 @@ package main
 import (
     "log"
     "net/http"
-    "lab6/database"
-    "lab6/routes"
+    "lab6-web/database"
+    "lab6-web/routes"
     "github.com/gorilla/handlers"
 )
 

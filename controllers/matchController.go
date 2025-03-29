@@ -5,8 +5,8 @@ import (
     "net/http"       
     "strconv"        
     "github.com/gorilla/mux" 
-    "lab6/database"
-    "lab6/models"
+    "lab6-web/database"
+    "lab6-web/models"
 )
 
 
