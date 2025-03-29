@@ -10,7 +10,7 @@ var DB *sql.DB
 
 func ConnectDB() {
     var err error
-    DB, err = sql.Open("postgres", "postgres://Camila:CR2343universidad@localhost:5432/Liga?sslmode=disable")
+    DB, err = sql.Open("postgres", "postgres://Camila:CR2343universidad@db:5432/Liga?sslmode=disable")
 
     if err != nil {
         log.Fatal("Error al conectar a la base de datos:", err)
